@@ -173,6 +173,10 @@ class SalesOrder(SellingController):
 		self.update_project()
 		self.update_prevdoc_status('submit')
 
+
+
+
+
 	def on_cancel(self):
 		# Cannot cancel closed SO
 		if self.status == 'Closed':
@@ -794,3 +798,11 @@ def get_default_bom_item(item_code):
 	bom = bom[0].name if bom else None
 
 	return bom
+
+
+@frappe.whitelist(allow_guest=True)
+
+def alternate_item(item_group_filter):
+    
+    return frappe.db.sql("""SELECT item_code from `tabItem` WHERE item_group =%s""",item_group_filter,as_dict=1)
+

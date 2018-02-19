@@ -1,7 +1,10 @@
 // Copyright (c) 2015, Frappe Technologies Pvt. Ltd. and Contributors
 // License: GNU General Public License v3. See license.txt
 
+
+
 {% include 'erpnext/selling/sales_common.js' %}
+
 
 frappe.ui.form.on("Sales Order", {
 	setup: function(frm) {
@@ -441,3 +444,99 @@ erpnext.selling.SalesOrderController = erpnext.selling.SellingController.extend(
 });
 
 $.extend(cur_frm.cscript, new erpnext.selling.SalesOrderController({frm: cur_frm}));
+
+
+
+/*
+cur_frm.fields_dict["items"].grid.get_field("item_code").get_query = function(doc, cdt, cdn){
+       return {
+               filters:{
+                       "item_group": "Burger"
+               }
+       }
+}
+d.item_group_filter
+
+
+cur_frm.set_query("item_code", "items", function(doc, cdt, cdn) {
+	var d = locals[cdt][cdn];
+	return{
+		filters: {
+			'item_group': d.item_group_filter,
+	
+		}
+	}
+		//refresh_field('items');
+
+});
+*/
+
+/*
+frappe.ui.form.on("Sales Order", "onload", function(frm){
+console.log("fffff");
+var a;
+cur_frm.set_query("item_group_filter", "items",  function (doc, cdt, cdn) 
+{
+	console.log("groupppppps");
+var d= locals[cdt][cdn];
+var d1 =  {   
+              "item_group_filter": 'Burger'
+         };   
+frappe.call({
+    		method: "erpnext.selling.doctype.sales_order.sales_order.alternate_item",
+             	args: d1,
+    		callback: function(r)
+				{ 
+						console.log(r.message);
+
+			a = JSON.parse(JSON.stringify(r.message));
+
+            //   a = r.message;
+				}
+    	});
+
+return { 
+		                    filters: { "item_code": a}
+
+			}
+refresh_field("item_code");
+	});
+});
+
+
+
+
+cur_frm.fields_dict["items"].grid.get_field("item_code").set_query = function(doc, cdt, cdn){
+		var d = locals[cdt][cdn];
+
+				return {
+					filters: {'item_group': 'Burger'}
+				}
+}
+
+
+*/
+
+/*
+this.frm.set_query("item_code", "items", function() {
+				return {
+					query: "erpnext.controllers.queries.item_query",
+					filters: {'item_group': "Burger"}
+				}
+			
+
+
+
+
+
+cur_frm.fields_dict["items"].grid.get_field("item_code").get_query = function(doc, cdt, cdn){
+			var d = locals[cdt][cdn];
+
+       return {
+               filters:{
+                       "item_group": d.item_group_filter
+
+               }
+       }
+}
+	*/
